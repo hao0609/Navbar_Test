@@ -3,7 +3,27 @@
 import icon from './icons/icon.vue' 
 import shopping_cart from './icons/shopping_cart.vue' 
 import user from './icons/user.vue' 
-import hamburger from './icons/hamburger.vue'
+// import hamburger from './icons/hamburger.vue'
+
+import { ref } from 'vue';
+
+const checked = ref(false);
+const rwd_menu = ref(null);
+
+const checked_change = () => {
+
+    
+    if (checked.value === true && rwd_menu.value) {
+
+        rwd_menu.value.style.visibility = 'visible';
+        rwd_menu.value.style.transform = 'scale(1)';
+
+    } else if (checked.value === false ) {
+        console.log("test");
+        rwd_menu.value.style.visibility = 'hidden';
+        rwd_menu.value.style.transform = 'scale(0)';
+    }
+};
 
 </script>
 
@@ -33,19 +53,20 @@ import hamburger from './icons/hamburger.vue'
         </nav>
 
 
-        <hamburger/>
-
-        <!-- <div class="hamburger_box">
-            <input type="checkbox" class="hamburger_check" @change="checked">
+        <div class="hamburger_box" >
+            <input type="checkbox" class="hamburger_check"  @change="checked_change" v-model="checked">
             <div class="hamburger">
-                <div></div>
-            </div>
-        </div> -->
+                <div>
+                    
+                </div>
+        </div>
+
+</div>
 
 
     </header>
 
-    <div class="rwd_menu">
+    <div class="rwd_menu" ref="rwd_menu">
             <div class="rwd_menu_content">
                 <div class="tittle_box">
             
@@ -69,13 +90,17 @@ import hamburger from './icons/hamburger.vue'
 
 <style>
 .rwd_menu{
-    background-color: #E0C4EE;
+    background-color: #e0c4ee;
     position: absolute;
     width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    visibility: hidden;
+    transition: all .4s ease;
+    border-radius: 10%;
+    transform: scale(0);
 }
 .rwd_menu_content{
     width: 100%;
@@ -120,32 +145,31 @@ import hamburger from './icons/hamburger.vue'
     position: relative;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+
 }
 .blue_man{
     display: block;
     position: absolute;
-    right: 0px;
-    bottom: 0px;
+    right: 0;
+    bottom: 0;
     z-index: 2;
-
 }
-.yellow_man{
+.yellow_man {
     display: block;
     position: absolute;
-    right: 250px;
+    right: 150px;
     bottom: 5px;
     z-index: 1;
 }
 
 .blue_man>img{
     display: block;
-    width: 150%;
+    width: 100%;
 
 }
 .yellow_man>img{
     display: block;
-    width: 150%;
+    width: 100%;
 
 }
 
